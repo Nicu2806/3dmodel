@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h2>Logare</h2>
+
+    <form action="/login" method="POST">
+        <label for="user_type">Selectează tipul de utilizator:</label><br>
+        <input type="radio" id="user" name="user_type" value="user" checked>
+        <label for="user">Utilizator simplu</label><br>
+        <input type="radio" id="admin" name="user_type" value="admin">
+        <label for="admin">Admin</label><br><br>
+
+        <div id="admin_password" style="display: none;">
+            <label for="password">Parola admin:</label>
+            <input type="password" id="password" name="password">
+        </div>
+
+        <button type="submit">Logare</button>
+    </form>
+
+    <script>
+        // Afișează câmpul pentru parola admin doar dacă este selectat admin
+        document.querySelector('input[value="admin"]').addEventListener('change', function() {
+            document.getElementById('admin_password').style.display = 'block';
+        });
+        document.querySelector('input[value="user"]').addEventListener('change', function() {
+            document.getElementById('admin_password').style.display = 'none';
+        });
+    </script>
+</body>
+</html>

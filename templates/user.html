@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Page</title>
+    <style>
+        video { width: 100%; height: auto; }
+        #qr-result { margin-top: 20px; font-size: 18px; color: green; }
+    </style>
+</head>
+<body>
+    <h2>Bine ai venit, utilizator!</h2>
+    <p>Scanează codul QR pentru a vizualiza modelul 3D.</p>
+
+    <!-- Video pentru fluxul camerei -->
+    <video id="video" autoplay></video>
+
+    <!-- Rezultatul QR code-ului -->
+    <div id="qr-result">QR Code rezultat: <span id="outputData"></span></div>
+
+    <!-- Delogare -->
+    <a href="/logout">Delogare</a>
+
+    <!-- Scripturi necesare -->
+    <script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.18.3/umd/index.min.js"></script>
+    <script>
+        // Activare camera live cu WebRTC
+        const video = document.getElementById('video');
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
+            .then(stream => {
+                video.srcObject = stream;
+            })
+            .catch(console.error);
+
+        // Configurare cititor QR code folosind ZXing
+        const codeReader = new ZXing.BrowserQRCodeReader();
+        codeReader.decodeFromVideoDevice(null, 'video', (result, err) => {
+            if (result) {
+                // Afisăm codul QR scanat
+                document.getElementById('outputData').textContent = result.text;
+
+                // În această secțiune poți adăuga funcția pentru a deschide modelul STL
+                window.location.href = result.text;  // Redirect către URL-ul fișierului STL
+            }
+        });
+    </script>
+</body>
+</html>

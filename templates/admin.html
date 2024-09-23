@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+</head>
+<body>
+    <h2>Bine ai venit, admin!</h2>
+    <form action="/admin" method="POST" enctype="multipart/form-data">
+        <label for="file">Încarcă un fișier STL:</label>
+        <input type="file" id="file" name="file"><br><br>
+        <button type="submit">Încarcă</button>
+    </form>
+    <a href="/logout">Delogare</a>
+</body>
+</html>
